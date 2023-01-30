@@ -23,9 +23,13 @@ if __name__ == '__main__':
 
     tag_dict_array = mastodon.trending_tags()
 
-    tags = extract_tags_from_tags_dict(tag_dict_array)
+    tags_array = extract_tags_from_tags_dict(tag_dict_array)
+    tags = '\n'.join(tags_array)
 
-    tag_str = 'Trending tags:\n\n' + '\n'.join(tags)
+    tag_str = 'Trending federated hashtags:\n\n{}\n\nTrending hashtags are also available at {}/explore/tags'.format(
+        tags,
+        host_url
+    )
 
     response = mastodon.status_post(
         tag_str,
